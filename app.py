@@ -1,15 +1,12 @@
-from flask import Flask, jsonify, request, json, make_response
+from functools import wraps
+from flask import Flask, jsonify, request, make_response
 from flask_restful import Resource, Api, fields
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from marshmallow import Schema, fields
+from marshmallow import fields
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_httpauth import HTTPBasicAuth
-from functools import wraps
 import datetime
-from datetime import timedelta
-from decouple import config
-from flask_jwt_extended import JWTManager
 import jwt
 import uuid
 
@@ -431,4 +428,4 @@ api.add_resource(EnrollmentDetail, '/enrollments/<int:course_id>')
 
 
 if __name__ == '__main__':
-    app.run(DEBUG=True)
+    app.run(debug=True)
