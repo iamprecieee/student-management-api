@@ -10,8 +10,7 @@
 
 <!-- About the Project -->
 ## About
-This is a REST API that enables admin/staff to register accounts and perform CRUD operations on student data, which can be tested using postman app.
-Students have limited access and can only view their profile, courses, grades and CGPA.
+This is a REST API that that facilitates account registration and comprehensive CRUD operations for student data. Admin and staff members have full access to manage student records, while students enjoy limited access, only able to view their profiles, courses, grades, and CGPA.
 
 This student management API was built with Python's Flask-RESTX by <a href="https://www.github.com/iamprecieee">iamprecieee</a> during Backend Engineering live classes at <a href="https://altschoolafrica.com/schools/engineering">AltSchool Africa</a>.
 
@@ -29,13 +28,19 @@ This student management API was built with Python's Flask-RESTX by <a href="http
 <!-- Lessons from the Project -->
 ## Lessons Learned
 
-Creating this API helped me learn and practice:
-* API Development with Python
-* Testing Postman
-* Debugging
-* Routing
-* Database Management
-* User Authentication and Authorization
+Developing this API has gained me hands-on experience and valuable skills in several key areas:
+
+API Development with Python using Flask-smorest: Working with Flask-smorest has allowed me to build robust and feature-rich APIs efficiently. It provided a structured approach to creating endpoints and managing resources.
+
+Testing Postman: I have learned how to utilize Postman effectively to test and validate my API endpoints.
+
+Debugging: I have also been able  to improve my skills in identifying and resolving issues efficiently, improving the overall quality of my code.
+
+Routing: Understanding and implementing routing mechanisms in Flask-smorest has allowed me to design a well-organized API with clean and intuitive URL patterns.
+
+Database Management: Integrating the database into my API using Flask-SQLAlchemy has been a valuable experience. I've learned to create models, interact with the database, and perform CRUD (Create, Read, Update, Delete) operations on data.
+
+User Authentication and Authorization: Implementing user authentication and authorization has been crucial for securing the API. I now have a good understanding of how to handle user access and permissions effectively.
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
