@@ -18,9 +18,9 @@ This student management API was built with Python's Flask-RESTX by <a href="http
 
 ### Built With:
 
-![Python][python]
-![Flask][flask]
-![SQLite][sqlite]
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
