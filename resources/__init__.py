@@ -6,6 +6,7 @@ import os
 from .db import db
 from .student import blp as StudentBlueprint
 from .course import blp as CourseBlueprint
+from .grade import blp as GradeBlueprint
 
 
 def create_app():
@@ -32,6 +33,7 @@ def create_app():
     # resource blueprint registrations
     api.register_blueprint(StudentBlueprint)
     api.register_blueprint(CourseBlueprint)
+    api.register_blueprint(GradeBlueprint)
     
     
     

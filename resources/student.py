@@ -16,8 +16,9 @@ class StudentDetail(MethodView):
         return StudentModel.query.all()
     
     @blp.arguments(StudentSchema)
-    @blp.response(201, StudentSchema)
+    @blp.response(201)
     def post(self, student_data):
+        student_data["name"] = student_data["name"].title()
         student = StudentModel(**student_data)
         try:
             db.session.add(student)
@@ -26,8 +27,10 @@ class StudentDetail(MethodView):
             db.session.rollback() 
             abort(400, message="A student with that email already exists!")
         except SQLAlchemyError:
+            db.session.rollback()
             abort(500, message="Student could not be created.")
-        return student
+        response = {"message": "Student created successfully."}
+        return response
     
     
 @blp.route("/student/<int:student_id>")
@@ -40,7 +43,7 @@ class Student(MethodView):
         return student
     
     @blp.arguments(StudentUpdateSchema)
-    @blp.response(201, StudentSchema)
+    @blp.response(201)
     def put(self, student_data, student_id):
         student = StudentModel.query.get(student_id)
         if student:
@@ -52,7 +55,11 @@ class Student(MethodView):
         except IntegrityError:
             db.session.rollback() 
             abort(400, message="A student with that email already exists!")
-        return student
+        except SQLAlchemyError:
+            db.session.rollback() 
+            abort(500, message = "Student could not be updated.")
+        response = {"message": "Student updated successfully."}
+        return response
         
     @blp.response(200)
     def delete(self, student_id):
@@ -63,5 +70,6 @@ class Student(MethodView):
         except:
             db.session.rollback() 
             abort(404, message="Student not found!")
-        return {"message": "Student deleted."}
+        response = {"message": "Student deleted successfully."}
+        return response
     
