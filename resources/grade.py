@@ -1,6 +1,7 @@
 from flask_smorest import Blueprint, abort
 from flask.views import MethodView
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from flask_jwt_extended import jwt_required, current_user
 
 from ..models import StudentModel, GradeModel, CourseModel
 from ..schema import GradeSchema, GradeUpdateSchema
@@ -12,6 +13,7 @@ blp = Blueprint("Grades", "grades", description="Operations on grades.")
 @blp.route("/grade")
 class GradeList(MethodView):
     @blp.response(201, GradeSchema(many=True))
+    @jwt_required()
     def get(self):
         return GradeModel.query.all()
         
@@ -20,7 +22,10 @@ class GradeList(MethodView):
 class GradeStudent(MethodView):
     @blp.arguments(GradeSchema)
     @blp.response(201)
+    @jwt_required(fresh=True)
     def post(self, grade_data, student_id, course_id):
+        if current_user.is_admin == False:
+            abort(403, message = "You do not have the required clearance for this!")
         student = StudentModel.query.get(student_id)
         if not student:
             abort(404, message="Student not found!")
@@ -47,6 +52,7 @@ class GradeStudent(MethodView):
 @blp.route("/student/<int:student_id>/course/<string:course_name>")
 class Grade(MethodView):
     @blp.response(200)
+    @jwt_required()
     def get(self, student_id, course_name):
         grade = GradeModel.query.filter_by(course_name=course_name.capitalize(), student_id=student_id).first()
         if not grade:
@@ -56,7 +62,10 @@ class Grade(MethodView):
     
     @blp.arguments(GradeUpdateSchema)
     @blp.response(201)
+    @jwt_required(fresh=True)
     def put(self, grade_data, student_id, course_name):
+        if current_user.is_admin == False:
+            abort(403, message = "You do not have the required clearance for this!")
         grade = GradeModel.query.filter_by(course_name=course_name.capitalize(), student_id=student_id).first()
         if grade:
             grade.grade = grade_data.get("grade", grade.grade).capitalize()

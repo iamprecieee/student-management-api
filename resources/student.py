@@ -1,6 +1,7 @@
 from flask_smorest import Blueprint, abort
 from flask.views import MethodView
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from flask_jwt_extended import jwt_required, current_user
 
 from ..models import StudentModel
 from ..schema import StudentSchema, StudentUpdateSchema
@@ -12,12 +13,16 @@ blp = Blueprint("Students", "students", description="Operations on students.")
 @blp.route("/student")
 class StudentDetail(MethodView):
     @blp.response(200, StudentSchema(many=True))
+    @jwt_required()
     def get(self): # returns all students
         return StudentModel.query.all()
     
     @blp.arguments(StudentSchema)
     @blp.response(201)
+    @jwt_required(fresh=True)
     def post(self, student_data):
+        if current_user.is_admin == False:
+            abort(403, message = "You do not have the required clearance for this!")
         student_data["name"] = student_data["name"].title()
         student = StudentModel(**student_data)
         try:
@@ -36,6 +41,7 @@ class StudentDetail(MethodView):
 @blp.route("/student/<int:student_id>")
 class Student(MethodView):
     @blp.response(200, StudentSchema)
+    @jwt_required()
     def get(self, student_id):
         student = StudentModel.query.get(student_id)
         if not student:
@@ -44,7 +50,10 @@ class Student(MethodView):
     
     @blp.arguments(StudentUpdateSchema)
     @blp.response(201)
+    @jwt_required(fresh=True)
     def put(self, student_data, student_id):
+        if current_user.is_admin == False:
+            abort(403, message = "You do not have the required clearance for this!")
         student = StudentModel.query.get(student_id)
         if student:
             student.name = student_data.get("name", student.name)
@@ -62,7 +71,10 @@ class Student(MethodView):
         return response
         
     @blp.response(200)
+    @jwt_required(fresh=True)
     def delete(self, student_id):
+        if current_user.is_admin == False:
+            abort(403, message = "You do not have the required clearance for this!")
         try:
             student = StudentModel.query.get(student_id)
             db.session.delete(student)

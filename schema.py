@@ -16,7 +16,7 @@ class PlainGradeSchema(Schema):
     grade = fields.Str()
     course_name = fields.Str()
     student_id = fields.Int()
-    
+      
 class StudentUpdateSchema(Schema):
     name = fields.Str()
     email = fields.Str()
@@ -37,3 +37,12 @@ class CourseSchema(PlainCourseSchema):
     
 class GradeSchema(PlainGradeSchema):
     students = fields.Nested(PlainStudentSchema())
+    
+class UserSchema(Schema):
+    id = fields.Int(dump_only=True)
+    username = fields.Str(required=True)
+    password = fields.Str(required=True, load_only=True)
+    is_admin = fields.Bool()
+    
+class UserAdminStatusSchema(Schema):
+    is_admin = fields.Bool()
