@@ -1,4 +1,4 @@
-from ..resources.db import db
+from resources.db import db
 from .enrollment import enrollment
 
 class CourseModel(db.Model):

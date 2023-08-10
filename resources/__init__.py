@@ -6,7 +6,7 @@ import os
 
  
 from .db import db
-from ..models import UserModel
+from models import UserModel
 from .student import blp as StudentBlueprint
 from .course import blp as CourseBlueprint
 from .grade import blp as GradeBlueprint
@@ -44,7 +44,7 @@ def create_app():
     api.register_blueprint(StudentBlueprint)
     api.register_blueprint(CourseBlueprint)
     api.register_blueprint(GradeBlueprint)
-    app.register_blueprint(UserBlueprint)
+    api.register_blueprint(UserBlueprint)
     
     # database creation
     @app.before_first_request

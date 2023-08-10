@@ -3,8 +3,8 @@ from flask.views import MethodView
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from flask_jwt_extended import jwt_required, current_user
 
-from ..models import StudentModel
-from ..schema import StudentSchema, StudentUpdateSchema
+from models import StudentModel
+from schema import StudentSchema, StudentUpdateSchema
 from .db import db
 
 blp = Blueprint("Students", "students", description="Operations on students.")
