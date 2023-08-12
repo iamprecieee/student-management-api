@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_smorest import Api
 from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
 from dotenv import load_dotenv
 import os
 
@@ -41,6 +42,7 @@ def create_app():
     db.init_app(app)
     api = Api(app)
     jwt = JWTManager(app)
+    migrate = Migrate(app, db)
     
     # resource blueprint registrations
     api.register_blueprint(StudentBlueprint)
@@ -48,10 +50,10 @@ def create_app():
     api.register_blueprint(GradeBlueprint)
     api.register_blueprint(UserBlueprint)
     
-    # database creation
-    @app.before_first_request
-    def create_tables():
-        db.create_all()
+    # database creation - no longer necessary as we are now using flask_migrate
+    # @app.before_first_request
+    # def create_tables():
+    #     db.create_all()
         
     # jwt authorisation, expiration, freshness
     @jwt.expired_token_loader

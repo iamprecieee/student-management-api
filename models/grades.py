@@ -10,6 +10,6 @@ class GradeModel(db.Model):
     student_id = db.Column(db.Integer, db.ForeignKey("students.id"))
     students = db.relationship("StudentModel", back_populates="grades")
     
-    table_args = (
+    tableargs = (
         db.UniqueConstraint('course_name', 'student_id', name='_student_grade_uc'),
     )
