@@ -104,7 +104,7 @@ rich==13.4.2
 rlp==2.0.1
 shortuuid==1.0.11
 six==1.16.0
-SQLAlchemy==2.0.4
+SQLAlchemy==2.0.19
 tk==0.1.0
 tomli==2.0.1
 toolz==0.12.0
