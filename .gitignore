@@ -1,4 +1,5 @@
 senv
+.env
 .vscode
 practice.py
 __pycache__
