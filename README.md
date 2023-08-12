@@ -46,5 +46,5 @@ User Authentication and Authorization: Implementing user authentication and auth
 
 ---
 
-
+Swagger UI: [https://student-api-flask.onrender.com/swagger-ui](https://student-api-flask.onrender.com/swagger-ui)
 

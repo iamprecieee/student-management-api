@@ -1,8 +1,10 @@
 senv
 .env
-.vscode
 practice.py
 __pycache__
 *.pyc
 .DS_Store
 instance
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
