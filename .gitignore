@@ -1,8 +1,9 @@
 senv
 .env
-.vscode
 practice.py
+temp_auto_push.bat
 __pycache__
 *.pyc
 .DS_Store
-instance
+instance.gitignore
+branch_structure.json
