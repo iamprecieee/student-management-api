@@ -30,7 +30,7 @@ class GradeStudent(MethodView):
         if not student:
             abort(404, message="Student not found!")
         course = CourseModel.query.get(course_id)
-        if not course in student.courses:
+        if course not in student.courses:
             abort(404, message="Course not found!")
         grade = GradeModel()
         new_grade_data = {key: value.title() for key, value in grade_data.items()}
